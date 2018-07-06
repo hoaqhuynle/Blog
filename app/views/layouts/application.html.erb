@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blog</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+      <div class="container">
+        <h1 class="display-1" style="text-align: center;"><strong>Blog</strong></h1>
+        <% if user_signed_in? %>
+          <div style="text-align: right;">
+            Hello, <strong><%= current_user.email %></strong> - 
+            <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+          </div>
+        <% end %>
+      </div>
+    </header>
+
+    <!-- A grey horizontal navbar that becomes vertical on small screens -->
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+      <div class="container">
+        <!-- Links -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <%= link_to 'Blog', articles_path, class: 'navbar-brand' %>
+          </li>
+          <li class="nav-item">
+            <% if user_signed_in? %>
+              <%= link_to 'Edit Profile', edit_user_registration_path, class: 'nav-link' %>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <% if can? :manage, :all %>
+              <%= link_to 'Users Management', admins_path, class: 'nav-link' %>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+
+    <div class="container">
+      <p class="navbar-text pull-right">
+      <% if !user_signed_in? %>
+        <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+        <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+      <% end %>
+
+      <%= yield %>
+    </div>
+
+    <footer style="text-align: center; padding: 90px; background-color: black; color: white; margin-top: 50px;">
+        Copyright &copy; by HuynhLNH 2018
+    </footer>
+  </body>
+</html>

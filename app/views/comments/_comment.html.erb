@@ -1,0 +1,8 @@
+<p class="comment">
+	<strong><%= comment.username %></strong>
+	<%= comment.body %><br>
+
+	<% if can? :destroy, comment %>
+		<%= link_to 'Delete', comment_path(comment), method: :delete, data: { confirm: 'Are you sure' }, remote: :true, class: 'delete_comment' %>
+	<% end %>
+</p>

@@ -1,0 +1,25 @@
+<% if notice != nil %>
+  <p class="alert alert-primary" id="notice"><%= notice %></p>
+<% end %>
+
+<% if can? :create, Article %>
+  <p><%= link_to 'New Article', new_article_path, class: 'btn btn-primary' %></p>
+<% end %>
+
+<% @articles.each do |article| %>
+  <div class="jumbotron">
+    <h1><%= link_to article.title, article %></h1>
+    <p><%= article.text %></p>
+
+    <% if can? :update, article %>
+    	<%= link_to 'Edit', edit_article_path(article), class: 'btn btn-primary' %>
+    <% end %>
+
+    <% if can? :destroy, article %>
+    	<%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger delete_article', remote: true %>
+    <% end %>
+  </div>
+<% end %>
+
+<%= paginate @articles %>
+

@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Users Management</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th colspan="3">Email</th>
+      <th colspan="3">Delete</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr class="delete_user">
+        <td colspan="3"><%= user.email %></td>
+        <td colspan="3"><%= link_to 'Delete', admin_path(user), method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: 'btn btn-danger' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
