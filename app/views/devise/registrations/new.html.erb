@@ -21,7 +21,7 @@
     <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
   </div>
 
-  <div>
+  <div style="visibility: hidden; height: 0px;">
     <% for role in User::ROLES %>
       <% if role == User::ROLES.at(0) %>
         <%= check_box_tag "user[roles][#{role}]", role, false, {:name => "user[roles][]"}%>
